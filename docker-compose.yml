@@ -1,0 +1,11 @@
+version: '2'
+services:
+  api_blueprint:
+    build: ./api_blueprint
+    ports:
+      - "8088:8088"
+      - "3000:3000"
+    volumes:
+      - /data/htdocs/docker/src/api_blueprint:/usr/src/api_blueprint/src
+#    command: gulp & hariko -f 'src/apidocs/*.md' -v --host 0.0.0.0 --watch
+
