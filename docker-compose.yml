@@ -7,16 +7,17 @@ services:
       - "3000:3000"
     volumes:
       - ../src/api_blueprint:/usr/src/api_blueprint/src
+  app:
+    build: ./app
+    volumes:
+      - /var/run/php-fpm/
+      - ../src:/var/www/html
   web:
     build: ./web
     ports:
       - "80:80"
-    volumes:
-      - ../src:/var/www/html
-    depends_on:
+    volumes_from:
       - app
-  app:
-    build: ./app
-    volumes:
-      - ../src:/var/www/html
+    
+
 
