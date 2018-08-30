@@ -7,9 +7,9 @@ var gulp = require('gulp'),
 
 var reload = browserSync.reload;
 
-var TEMPLATE_FILES = ['src/apidocs/**/*.md'],
-    LAYOUT_FILE = 'src/apidocs/layout.md',
-    PUBLISHED_DIR = 'src/published';
+var TEMPLATE_FILES = ['/src/api_blueprint/apidocs/**/*.md'],
+    LAYOUT_FILE = '/src/api_blueprint/apidocs/layout.md',
+    PUBLISHED_DIR = '/src/api_blueprint/published';
 
 gulp.task('combine', function(){
   return gulp.src(LAYOUT_FILE)

@@ -8,10 +8,8 @@ RUN apk update \
 RUN apk --no-cache add python
 
 ENV APP_ROOT /usr/src/api_blueprint
-ENV SRC_ROOT /usr/src/api_blueprint/src
 
 RUN mkdir -p $APP_ROOT
-RUN mkdir -p $SRC_ROOT
 
 WORKDIR $APP_ROOT
 
@@ -20,6 +18,4 @@ COPY gulpfile.js $APP_ROOT
 
 RUN npm install -g gulp && npm install && npm install -g hariko --unsafe-perm && npm cache clean --force
 
-CMD gulp & hariko -f 'src/apidocs/*.md' -v --host 0.0.0.0 --watch
-
-
+CMD gulp & hariko -f '/src/api_blueprint/apidocs/*.md' -v --host 0.0.0.0 --watch

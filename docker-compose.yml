@@ -1,23 +1,29 @@
 version: '2'
 services:
+  # 共有ボリューム
+  shared_volume:
+    build: ./shared_volume
+    tty: true
+    volumes:
+      - /var/run/php-fpm/
+      - ../src:/src
+  # API Blueprint
   api_blueprint:
     build: ./api_blueprint
     ports:
       - "8088:8088"
       - "3000:3000"
-    volumes:
-      - ../src/api_blueprint:/usr/src/api_blueprint/src
+    volumes_from:
+      - shared_volume
+  # アプリケーション(Phalcon)
   app:
     build: ./app
-    volumes:
-      - /var/run/php-fpm/
-      - ../src:/var/www/html
+    volumes_from:
+      - shared_volume
+  # WEBサーバ(Nginx)
   web:
     build: ./web
     ports:
       - "80:80"
     volumes_from:
-      - app
-    
-
-
+      - shared_volume
