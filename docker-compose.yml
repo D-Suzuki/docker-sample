@@ -20,6 +20,8 @@ services:
     build: ./app
     volumes_from:
       - shared_volume
+    depends_on:
+      - db
   # WEBサーバ(Nginx)
   web:
     build: ./web
@@ -27,3 +29,14 @@ services:
       - "80:80"
     volumes_from:
       - shared_volume
+  # DBサーバ(MySQL)
+  db:
+    build: ./db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: dbuserpass
+    volumes:
+      - db-data:/var/lib/mysql
+volumes:
+  db-data:
