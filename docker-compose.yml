@@ -18,6 +18,10 @@ services:
   # アプリケーション(Phalcon)
   app:
     build: ./app
+    environment:
+      WRITE_DB_HOST: db
+      READ_DB_HOST: db
+      LOG_LEVEL: 7
     volumes_from:
       - shared_volume
     depends_on:
